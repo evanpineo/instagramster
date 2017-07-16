@@ -6,27 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,100,300,600,700' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <%= link_to 'Instagramster', root_path, class: "navbar-brand" %>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <div class="navbar-nav text-center">
-          <a class="nav-item nav-link" href="#">Features</a>
+    <div class="top-nav">
+      <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+        <div class="brand float-left"><%= link_to 'Instagramster', root_path %></div>
+        <div class="add float-right">
           <% if current_user %>
-            You're signed in as <%= current_user.email %>.
-            <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-item nav-link" %>
+            Welcome, <%= current_user.email %>
+            <%= link_to 'New Post', new_gram_path %>
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
           <% else %>
-            <%= link_to "Sign In", new_user_session_path, class: "nav-item nav-link" %>
-            <%= link_to "Sign Up", new_user_registration_path, class: "nav-item nav-link" %>
+            <%= link_to "Sign In", new_user_session_path %>
+            <%= link_to "Sign Up", new_user_registration_path %>
           <% end %>
         </div>
       </div>
-    </nav>
+      <br class="clear-fix" />
+    </div>
     
     <% if notice.present? %>
       <p class="alert alert-info"><%= notice %></p>
