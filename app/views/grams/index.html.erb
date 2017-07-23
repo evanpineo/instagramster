@@ -3,7 +3,7 @@
 		<div class="card">
 			<div class="handle">Submitted by: @<%= gram.user.email.split('@').first.gsub(/\./, '') %></div>
 			<%= image_tag gram.picture, class: 'img-fluid' %>
-			<p><%= gram .message %></p>
+			<p><%= gram.message %></p>
 			<div class="gram-actions float-right">
 				<% if current_user && current_user == gram.user %>
 					<%= link_to 'Edit', edit_gram_path(gram) %>
@@ -13,13 +13,17 @@
 			<br class="clear-fix">
 			<div class="comments">
 				<h3><u>Comments</u></h3>
-				<% gram.comments.each do |comment| %>
-					<div class="comment">
-						<span class="comment-handle">
-							<b><%= comment.user.email.split('@').first.gsub(/\./, '') %></b>
-						</span>
-						- <%= comment.message %>
-					</div>
+				<% if gram.comments.present? %>
+					<% gram.comments.each do |comment| %>
+						<div class="comment">
+							<span class="comment-handle">
+								<b><%= comment.user.email.split('@').first.gsub(/\./, '') %></b>
+							</span>
+							- <%= comment.message %>
+						</div>
+					<% end %>
+				<% else %>
+					<h5><i>Nothing to see here, add a comment below</i></h5>
 				<% end %>
 				<h4 class="mt-5">Add a Comment</h4>
 				<%= simple_form_for Comment.new, url: gram_comments_path(gram) do |f| %>
